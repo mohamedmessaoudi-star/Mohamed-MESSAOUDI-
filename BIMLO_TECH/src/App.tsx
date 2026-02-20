@@ -298,9 +298,9 @@ export default function App() {
     struct: false,
     bimlo: false,
   });
-  const [notification, setNotification] = useState(null);
+  const [notification, setNotification] = useState<string | null>(null);
 
-  const showNotif = (msg) => {
+  const showNotif = (msg: string) => {
     setNotification(msg);
     setTimeout(() => setNotification(null), 4500);
   };
@@ -310,7 +310,7 @@ export default function App() {
     showNotif("↺ Nouveau projet initialisé");
   };
 
-  const toggleCheck = (role, id) => {
+  const toggleCheck = (role: string, id: number) => {
     if (state[role].validated) return;
     setState((s) => ({
       ...s,
@@ -323,7 +323,7 @@ export default function App() {
     }));
   };
 
-  const runAI = async (role) => {
+  const runAI = async (role: string) => {
     setScanning((s) => ({ ...s, [role]: true }));
     setState((s) => ({
       ...s,
@@ -407,7 +407,7 @@ export default function App() {
     }
   };
 
-  const validate = (role) => {
+  const validate = (role: string) => {
     setState((s) => ({ ...s, [role]: { ...s[role], validated: true } }));
     if (role === "cad") {
       setTimeout(
@@ -451,7 +451,7 @@ export default function App() {
     state.bimlo.validated,
   ].filter(Boolean).length;
 
-  const RoleCard = ({ role, cardClass }) => {
+  const RoleCard = ({ role, cardClass }: { role: string; cardClass: string }) => {
     const R = ROLES[role];
     const r = state[role];
     const colors = { cad: "#f59e0b", struct: "#a78bfa", bimlo: "#00c8ff" };
